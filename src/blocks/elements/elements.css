@@ -1,0 +1,38 @@
+@import url("./__element/elements__element.css");
+@import url("./__image/elements__image.css");
+@import url("./__bar/elements__bar.css");
+@import url("./__name/elements__name.css");
+@import url("./__heart-icon/elements__heart-icon.css");
+@import url("./__trash-icon/elements__trash-icon.css");
+@import url("./__heart-icon/_theme/elements__heart-icon_theme_dark.css");
+@import url("./__like-count/elements__like-count.css");
+@import url("./__like-section/elements__like-section.css");
+
+
+.elements {
+  font-family: 'Inter', "Arial", sans-serif;
+  max-width: 882px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 18px;
+  grid-row-gap: 20px;
+  box-sizing: border-box;
+  object-fit: contain;
+  padding: 0;
+}
+
+@media screen and (max-width: 850px) {
+
+.elements {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+}
+
+@media screen and (max-width: 700px) {
+
+.elements {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+}

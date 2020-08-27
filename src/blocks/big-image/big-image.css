@@ -1,0 +1,10 @@
+@import url("./__picture/big-image__picture.css");
+@import url("./__caption/big-image__caption.css");
+
+.big-image {
+  margin: 0;
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+
+}

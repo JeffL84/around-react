@@ -1,0 +1,38 @@
+.form__name {
+  font-family: 'Inter', "Arial", sans-serif;
+  margin-top: 54px;
+  margin-left: 36px;
+  margin-right: 36px;
+  border: none;
+  border-bottom: 1px dashed rgba(0, 0, 0, .2);
+  background-clip: padding-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  padding-bottom: 13.26px;
+  color: #C4C4C4;
+  opacity: .2;
+}
+
+/* .form__name:focus {
+  color: black;
+} */
+
+.form__name:valid {
+  color: black;
+  opacity: 1;
+}
+
+@media screen and (max-width: 500px) {
+
+.form__name {
+  margin-top: 36px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 0;
+  padding-bottom: 12px;
+}
+}
