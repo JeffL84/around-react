@@ -1,19 +1,29 @@
 import React from 'react';
 
 
-function PopupWithForm({...name, title, submitButtonName}) {
+function PopupWithForm(props) {
+  {/*removed this from arguments: {name, title, submitButtonName, ...rest}
+
+  and removed this when creating individual 
+  const [isOpened, setIsOpened] = React.useState(false);
+
+  function handleClick() {
+    setIsOpened(true);
+  }
+
+  */}
 
   return (
-    <section className = {`form form_type_${name} form-with-button`}>
+    <section className = {props.isOpened ? (`form form_type_${props.name} form-with-button form_is-opened`) : (`form form_type_${props.name} form-with-button`)}>
 
       <div className = "form__overlay"></div>
       <form className = "form__container">
 
-        <h2 className = "form__title">{title}</h2>
+        <h2 className = "form__title">{props.title}</h2>
 
         <div>{props.children}</div>
 
-        <button className = {`form__save-button form__${submitButtonName} hover hover_type_dark`} type = "submit">Save</button>
+        <button className = {`form__save-button form__${props.submitButtonName} hover hover_type_dark`} type = "submit" onClick = {props.onClick}>Save</button>
         <button className = "form__close-button hover"></button>
 
       </form>

@@ -1,43 +1,38 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import { isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen } from './App';
 
-function Main() {
+function Main(props) {
+
+  console.log("earlier in Main.js");
+
+
 
   return (
     <main>
+
+      {console.log("in Main.js")}
 
     <section className="profile section-width"> 
 
       <div className = "profile__section">
        
         <div className = "avatar">        
-        <img className = "profile__avatar" alt = "My avatar" onClick = {function handleEditAvatarClick() {
-      const editAvatarReact = document.querySelector(".form_type_change-avatar");
-      editAvatarReact.classList.add("form_is-opened");
-      }
-      }/>
+        <img className = "profile__avatar" alt = "My avatar" onClick = {props.onEditAvatar} />
         <img className = "hover_type_edit" src = "images/EditAvatarIcon.png" alt = "edit icon"/>
       </div>
         <div className = "profile__info">
     
           <h1 className = "profile__name">Name</h1>
-          <button className = "profile__edit-button hover" onClick = {function handleEditProfileClick() {
-      const editProfileReact = document.querySelector(".form_type_edit-profile");
-      editProfileReact.classList.add("form_is-opened");
-      }
-      }></button>
+          <button className = "profile__edit-button hover" onClick = {props.onEditProfile}></button>
           <p className = "profile__description">Description</p>
 
         </div>
             
       </div>
 
-      <button className = "profile__add-button hover" onClick = {function handleAddPlaceClick() {
-      const addCardReact = document.querySelector(".form_type_add-card");
-      addCardReact.classList.add("form_is-opened");
-      }
-      }></button>
+      <button className = "profile__add-button hover" onClick = {props.onEditProfile}></button>
 
     </section>
 
@@ -46,33 +41,32 @@ function Main() {
       <ul className = "elements"></ul>
     
     </section>
-{/* A JSX comment */}
-    <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button">
-  
 
-  </PopupWithForm>
-
-  <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button">
-  
-  <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minlength = "2" maxlength = "40" required/>
+    <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} >
+        <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minlength = "2" maxlength = "40" required/>
         <span id ="name-error" className = "form__input-error"></span>
         <input className = "form__description form__description-profile form__input" type = "text" id = "description" name = "description" placeholder = "About Me" minlength = "2" maxlength = "200" required/>
         <span id ="description-error" className = "form__input-error"></span>
-  </PopupWithForm>
+      </PopupWithForm>
 
-  <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button">
-  
+      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen}>
+        <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minlength = "1" maxlength = "30" required/>
+        <span id ="title-error" className = "form__input-error"></span>
+        <input className = "form__description form__description-card form__input" type = "url" id = "url" name = "url" placeholder = "Image link" required/>
+        <span id ="url-error" className = "form__input-error"></span>
+      </PopupWithForm>
 
-  </PopupWithForm>
+      <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
 
-  <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button">
-  
+      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen}>
+        <input className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" required/>
+        <span id ="urlAvatar-error" className = "form__input-error"></span>
+      </PopupWithForm>
 
-  </PopupWithForm>
+      <ImagePopup />
+    
 
-  <ImagePopup />
-
-    <section className = "form form_type_edit-profile form-with-button">
+    {/*<section className = "form form_type_edit-profile form-with-button">
        
       <div className = "form__overlay"></div>
       <form className = "form__container" name = "profileForm" novalidate>
@@ -87,9 +81,11 @@ function Main() {
 
       </form>
 
-    </section>
+    </section>*/}
 
-    <section className = "form form_type_add-card form-with-button">
+  
+
+    {/*<section className = "form form_type_add-card form-with-button">
 
       <div className = "form__overlay"></div>
       <form className = "form__container">
@@ -104,9 +100,11 @@ function Main() {
 
       </form>
 
-    </section>
+  </section> */}
 
-    <section className = "form form_type_delete-card form-with-button">
+
+
+    {/*<section className = "form form_type_delete-card form-with-button">
 
       <div className = "form__overlay"></div>
       <form className = "form__container">
@@ -117,9 +115,11 @@ function Main() {
 
       </form>
 
-    </section>
+</section>*/}
 
-    <section className = "form form_type_change-avatar form-with-button">
+
+
+    {/*<section className = "form form_type_change-avatar form-with-button">
 
       <div className = "form__overlay"></div>
       <form className = "form__container">
@@ -132,9 +132,10 @@ function Main() {
 
       </form>
 
-    </section>
+</section>*/}
 
-    <section className = "form form_type_image">
+  
+    {/*<section className = "form form_type_image">
 
       <div className = "form__overlay form__overlay_type_dark"></div>
       <form className = "form__container form__container_type_image">
@@ -150,7 +151,7 @@ function Main() {
 
       </form>
 
-    </section>
+</section>*/}
 
   </main>
 

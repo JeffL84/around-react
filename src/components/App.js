@@ -3,17 +3,45 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 
+
 //import './App.css';
 
 function App() {
+
+console.log("start APP");
+
+
+const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
   return (
     <div className="page">
-      <Header />
-      <Main />
-      <Footer />
-      
 
-    
+      <Header />
+
+      <Main 
+      onEditProfile = {() => { 
+        console.log("clicked");
+        setIsEditProfilePopupOpen(true);
+        
+      }}
+
+      onAddPlace =  {() => {
+        setIsAddPlacePopupOpen(true);
+        const addCardReact = document.querySelector(".form_type_add-card");
+        addCardReact.classList.add("form_is-opened"); }}
+
+      onEditAvatar = {() => {
+        setIsEditAvatarPopupOpen(true);
+        const editAvatarReact = document.querySelector(".form_type_change-avatar");
+        editAvatarReact.classList.add("form_is-opened");} }
+      
+      />
+
+      <Footer />
+
+      
     <template class = "elements__template">
       <li class = "elements__element">
         <button class = "elements__trash-icon hover"></button>
@@ -33,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export { App, isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen } ;
