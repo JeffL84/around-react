@@ -1,18 +1,12 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
-import { isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen } from './App';
+
 
 function Main(props) {
-
-  console.log("earlier in Main.js");
-
-
+  
+console.log("main");
 
   return (
     <main>
-
-      {console.log("in Main.js")}
 
     <section className="profile section-width"> 
 
@@ -32,7 +26,7 @@ function Main(props) {
             
       </div>
 
-      <button className = "profile__add-button hover" onClick = {props.onEditProfile}></button>
+      <button className = "profile__add-button hover" onClick = {props.onAddPlace}></button>
 
     </section>
 
@@ -42,28 +36,6 @@ function Main(props) {
     
     </section>
 
-    <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} >
-        <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minlength = "2" maxlength = "40" required/>
-        <span id ="name-error" className = "form__input-error"></span>
-        <input className = "form__description form__description-profile form__input" type = "text" id = "description" name = "description" placeholder = "About Me" minlength = "2" maxlength = "200" required/>
-        <span id ="description-error" className = "form__input-error"></span>
-      </PopupWithForm>
-
-      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen}>
-        <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minlength = "1" maxlength = "30" required/>
-        <span id ="title-error" className = "form__input-error"></span>
-        <input className = "form__description form__description-card form__input" type = "url" id = "url" name = "url" placeholder = "Image link" required/>
-        <span id ="url-error" className = "form__input-error"></span>
-      </PopupWithForm>
-
-      <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
-
-      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen}>
-        <input className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" required/>
-        <span id ="urlAvatar-error" className = "form__input-error"></span>
-      </PopupWithForm>
-
-      <ImagePopup />
     
 
     {/*<section className = "form form_type_edit-profile form-with-button">
