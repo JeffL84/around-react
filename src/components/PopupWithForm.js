@@ -2,8 +2,6 @@ import React from 'react';
 
 
 function PopupWithForm(props) {
-  
-  console.log("popupwithform");
 
   return (
     <div>
@@ -16,7 +14,7 @@ function PopupWithForm(props) {
         <div>{props.children}</div>
 
         <button className = {`form__save-button form__${props.submitButtonName} hover hover_type_dark`} type = "submit" onClick = {props.onClick}>Save</button>
-        <button className = "form__close-button hover"></button>
+        <button className = "form__close-button hover" onClick = {props.onClick}></button>
 
       </form>
 

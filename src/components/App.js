@@ -15,6 +15,8 @@ function App() {
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+
 
 function handleProfileClick() {
   console.log(isEditProfilePopupOpen);
@@ -29,6 +31,10 @@ function handleAddPlaceClick() {
 function handleEditAvatarClick() {
   console.log(isEditAvatarPopupOpen);
   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+}
+
+function handleImageClick() {
+  setIsImagePopupOpen(!isImagePopupOpen);
 }
 
   return (
@@ -56,28 +62,27 @@ function handleEditAvatarClick() {
       </Main>
       
       <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} >
-        {console.log("later of app " + isEditProfilePopupOpen)}
-          <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minlength = "2" maxlength = "40" required/>
+          <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minLength = "2" maxLength = "40" required/>
           <span id ="name-error" className = "form__input-error"></span>
           <input className = "form__description form__description-profile form__input" type = "text" id = "description" name = "description" placeholder = "About Me" minLength = "2" maxLength = "200" required/>
           <span id ="description-error" className = "form__input-error"></span>
-        </PopupWithForm>
+      </PopupWithForm>
 
-        <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen}>
+      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen}>
           <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>
           <span id ="title-error" className = "form__input-error"></span>
           <input className = "form__description form__description-card form__input" type = "url" id = "url" name = "url" placeholder = "Image link" required/>
           <span id ="url-error" className = "form__input-error"></span>
-        </PopupWithForm>
+      </PopupWithForm>
 
-        <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
+      <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
 
-        <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen}>
+      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen}>
           <input className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" required/>
           <span id ="urlAvatar-error" className = "form__input-error"></span>
-        </PopupWithForm>
+      </PopupWithForm>
 
-        <ImagePopup />
+      <ImagePopup isOpened = {handleImageClick}/>
 
       <Footer />
 
