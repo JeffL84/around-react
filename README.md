@@ -6,9 +6,9 @@ This is a re-worked Practicum project using React
 
 ## Skills used
 
-JS, React
+JS, React, CSS
 
 ## Link to github pages
 
-https://jeffl84.github.io/around-react/.
+https://jeffl84.github.io/around-react/index.html
 
