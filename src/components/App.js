@@ -10,32 +10,38 @@ import ImagePopup from './ImagePopup';
 
 function App() {
 
-  
-
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+const [selectedCard, setSelectedCard] = React.useState({});
 
+  function handleCardClick(evt) {
+    setIsImagePopupOpen(!isImagePopupOpen);
+    //console.log(evt.target.style.backgroundImage);
+    //console.log(evt.target.closest(".elements__element"));
+    //const taco = evt.target.querySelector("elements__image");
+    //console.log("taco" + taco);
+    setSelectedCard(evt.target.closest(".elements__element"));
+    //console.log(selectedCard);
+  }
 
+  
+  //console.log(selectedCard.querySelector(".elements__image"));
+  //const selectedCardImage = selectedCard.elements__image.style;
 function handleProfileClick() {
-  console.log(isEditProfilePopupOpen);
   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
 }
 
 function handleAddPlaceClick() {
-  console.log(isAddPlacePopupOpen);
   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
 }
 
 function handleEditAvatarClick() {
-  console.log(isEditAvatarPopupOpen);
   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
 }
 
-function handleImageClick() {
-  setIsImagePopupOpen(!isImagePopupOpen);
-}
+
 
   return (
     <div className="page">
@@ -46,29 +52,23 @@ function handleImageClick() {
         onEditProfile = {handleProfileClick} 
 
         onAddPlace = {handleAddPlaceClick}
-        
-        /*{() => {
-          setIsAddPlacePopupOpen(true);
-          console.log("clicked plus");
-          {/*const addCardReact = document.querySelector(".form_type_add-card");
-        addCardReact.classList.add("form_is-opened");  }} </div> */
 
         onEditAvatar = {handleEditAvatarClick} 
-         
-          /*const editAvatarReact = document.querySelector(".form_type_change-avatar");
-        editAvatarReact.classList.add("form_is-opened");}*/
-          >
-    
+
+        onCardClick = {handleCardClick} //might have issue here - used twice...
+      
+      >
+
       </Main>
       
-      <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} >
+      <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} onClick = {handleProfileClick} >
           <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minLength = "2" maxLength = "40" required/>
           <span id ="name-error" className = "form__input-error"></span>
           <input className = "form__description form__description-profile form__input" type = "text" id = "description" name = "description" placeholder = "About Me" minLength = "2" maxLength = "200" required/>
           <span id ="description-error" className = "form__input-error"></span>
       </PopupWithForm>
 
-      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen}>
+      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen} onClick = {handleAddPlaceClick}>
           <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>
           <span id ="title-error" className = "form__input-error"></span>
           <input className = "form__description form__description-card form__input" type = "url" id = "url" name = "url" placeholder = "Image link" required/>
@@ -77,29 +77,17 @@ function handleImageClick() {
 
       <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
 
-      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen}>
+      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen} onClick = {handleEditAvatarClick}>
           <input className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" required/>
           <span id ="urlAvatar-error" className = "form__input-error"></span>
       </PopupWithForm>
 
-      <ImagePopup isOpened = {handleImageClick}/>
+      <ImagePopup isOpened = {isImagePopupOpen} image = "" title="" card = {selectedCard}   onCardClick = {handleCardClick}/>
 
       <Footer />
 
       
-    <template className = "elements__template">
-      <li className = "elements__element">
-        <button className = "elements__trash-icon hover"></button>
-        <div className = "elements__image"></div>
-        <div className = "elements__bar">
-          <p className = "elements__name"></p>
-          <div className = "elements__like-section">
-          <button className = "elements__heart-icon hover"></button>
-          <p className = "elements__like-count"></p>
-        </div>
-        </div>
-      </li>
-    </template>
+   
 
 
 </div>

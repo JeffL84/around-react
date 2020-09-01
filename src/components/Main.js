@@ -1,12 +1,14 @@
 import React from 'react';
 import {api} from '../utils/api.js';
+import Card from './Card';
+
 
 function Main(props) {
 
   const [userName, setUserName] = React.useState("Name Placeholder");
   const [userDescription, setUserDescription] = React.useState("Description Placeholder");
   const [userAvatar, setUserAvatar] = React.useState("(.././images/blackheart.svg)");
-
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -15,7 +17,19 @@ function Main(props) {
       setUserDescription(res.job);
       setUserAvatar(res.avatar);
     });
-  })
+  }, [])
+
+  React.useEffect(()=> {
+    api.getCardList()
+    .then(res => {
+      //console.log(res);
+      setCards(res.map(card => ({
+        title: card.name,
+        image: card.link,
+        likes: card.likes.length
+      })));
+    })
+  }, [])
 
   return (
     <main>
@@ -44,9 +58,21 @@ function Main(props) {
 
     <section className="section-width">
 
-      <ul className = "elements"></ul>
+      <ul className = "elements">
+        {
+          cards.map(card => <Card
+            title = {card.title}
+            image = {card.image}
+            likes = {card.likes}
+            onCardClick = {props.onCardClick}
+            />)
+        }
+      </ul>
     
     </section>
+
+  
+
 
   </main>
 
