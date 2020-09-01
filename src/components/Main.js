@@ -22,7 +22,7 @@ function Main(props) {
   React.useEffect(()=> {
     api.getCardList()
     .then(res => {
-      //console.log(res);
+      console.log(res);
       setCards(res.map(card => ({
         title: card.name,
         image: card.link,
@@ -64,6 +64,7 @@ function Main(props) {
             title = {card.title}
             image = {card.image}
             likes = {card.likes}
+            card = {card}
             onCardClick = {props.onCardClick}
             />)
         }

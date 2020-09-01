@@ -14,19 +14,21 @@ const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
-const [selectedCard, setSelectedCard] = React.useState({});
+const [selectedCard, setSelectedCard] = React.useState(false);
 
-  function handleCardClick(evt) {
+  function handleCardClick() {
     setIsImagePopupOpen(!isImagePopupOpen);
+    setSelectedCard("card");
     //console.log(evt.target.style.backgroundImage);
     //console.log(evt.target.closest(".elements__element"));
     //const taco = evt.target.querySelector("elements__image");
     //console.log("taco" + taco);
-    setSelectedCard(evt.target.closest(".elements__element"));
-    //console.log(selectedCard);
+    //setSelectedCard(evt.target.closest(".elements__element"));
+    //setSelectedCard(evt.target.style.background);
+  
   }
 
-  
+  //console.log(selectedCard);
   //console.log(selectedCard.querySelector(".elements__image"));
   //const selectedCardImage = selectedCard.elements__image.style;
 function handleProfileClick() {
@@ -57,6 +59,7 @@ function handleEditAvatarClick() {
 
         onCardClick = {handleCardClick} //might have issue here - used twice...
       
+        selectedCard = {selectedCard}
       >
 
       </Main>
@@ -82,7 +85,7 @@ function handleEditAvatarClick() {
           <span id ="urlAvatar-error" className = "form__input-error"></span>
       </PopupWithForm>
 
-      <ImagePopup isOpened = {isImagePopupOpen} image = "" title="" card = {selectedCard}   onCardClick = {handleCardClick}/>
+      <ImagePopup isOpened = {isImagePopupOpen} image = "" title="Image Caption" card = {selectedCard} onClick = {handleCardClick}/>
 
       <Footer />
 

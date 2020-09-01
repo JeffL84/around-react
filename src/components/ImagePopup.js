@@ -15,7 +15,7 @@ function ImagePopup(props) {
             
         </figure>
 
-        <button className = "form__close-button form__close-button_type_image hover" onClick = {props.onCardClick}></button>
+        <button className = "form__close-button form__close-button_type_image hover" onClick = {props.onClick}></button>
 
       </form>
 
