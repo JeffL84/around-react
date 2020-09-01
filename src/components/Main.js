@@ -22,7 +22,7 @@ function Main(props) {
   React.useEffect(()=> {
     api.getCardList()
     .then(res => {
-      console.log(res);
+      //console.log(res);
       setCards(res.map(card => ({
         title: card.name,
         image: card.link,

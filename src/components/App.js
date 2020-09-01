@@ -19,7 +19,7 @@ const [selectedCard, setSelectedCard] = React.useState(false);
   function handleCardClick(card) {
     setIsImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(card);
-    console.log(card);
+    //console.log(card);
     //console.log(evt.target.style.backgroundImage);
     //console.log(evt.target.closest(".elements__element"));
     //const taco = evt.target.querySelector("elements__image");
