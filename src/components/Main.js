@@ -17,19 +17,20 @@ function Main(props) {
       setUserDescription(res.job);
       setUserAvatar(res.avatar);
     });
-  }, [])
 
-  React.useEffect(()=> {
     api.getCardList()
     .then(res => {
       //console.log(res);
       setCards(res.map(card => ({
+        key: card._id,
         title: card.name,
         image: card.link,
         likes: card.likes.length
       })));
     })
+
   }, [])
+
 
   return (
     <main>
@@ -60,7 +61,8 @@ function Main(props) {
 
       <ul className = "elements">
         {
-          cards.map(card => <Card
+          cards.map((card) => <Card
+            key = {card.key}
             title = {card.title}
             image = {card.image}
             likes = {card.likes}

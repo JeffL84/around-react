@@ -6,8 +6,10 @@ function Card(props) {
     props.onCardClick(props.card);
   } 
 
+
+
   return (
-    <div className = "elements__template">
+    <div className = "elements__template" key = {props.card.key}>
     <li className = "elements__element" >
       <button className = "elements__trash-icon hover"></button>
       <div className = "elements__image" style={{ backgroundImage: `url(${props.image})`}} onClick = {handleClick} ></div>
