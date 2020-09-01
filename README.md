@@ -8,6 +8,7 @@ This is a re-worked Practicum project using React
 
 JS, React
 
-## Link
+## Link to github pages
 
+https://jeffl84.github.io/around-react/.
 
