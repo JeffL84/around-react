@@ -16,9 +16,10 @@ const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 const [selectedCard, setSelectedCard] = React.useState(false);
 
-  function handleCardClick() {
+  function handleCardClick(card) {
     setIsImagePopupOpen(!isImagePopupOpen);
-    setSelectedCard("card");
+    setSelectedCard(card);
+    console.log(card);
     //console.log(evt.target.style.backgroundImage);
     //console.log(evt.target.closest(".elements__element"));
     //const taco = evt.target.querySelector("elements__image");
