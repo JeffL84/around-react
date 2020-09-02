@@ -61,8 +61,8 @@ function Main(props) {
 
       <ul className = "elements">
         {
-          cards.map((card) => <Card
-            key = {card.key}
+          cards.map((card, i) => <Card
+            key = {i}
             title = {card.title}
             image = {card.image}
             likes = {card.likes}
