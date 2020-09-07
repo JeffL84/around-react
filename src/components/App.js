@@ -1,9 +1,11 @@
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
+import {api} from '../utils/api.js';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 
 //import './App.css';
@@ -16,22 +18,23 @@ const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 const [selectedCard, setSelectedCard] = React.useState(false);
 
+const [currentUser, setCurrentUser] = React.useState({});
+
+React.useEffect(() => {
+  api.getUserInfo()
+  .then(res => {
+    setCurrentUser(res);
+  });
+}, [])
+
   function handleCardClick(card) {
     setIsImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(card);
     //console.log(card);
-    //console.log(evt.target.style.backgroundImage);
-    //console.log(evt.target.closest(".elements__element"));
-    //const taco = evt.target.querySelector("elements__image");
-    //console.log("taco" + taco);
-    //setSelectedCard(evt.target.closest(".elements__element"));
-    //setSelectedCard(evt.target.style.background);
-  
   }
 
   //console.log(selectedCard);
-  //console.log(selectedCard.querySelector(".elements__image"));
-  //const selectedCardImage = selectedCard.elements__image.style;
+
 function handleProfileClick() {
   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
 }
@@ -47,10 +50,10 @@ function handleEditAvatarClick() {
 
 
   return (
+    <CurrentUserContext.Provider value = {currentUser}>
     <div className="page">
 
       <Header />
-
       <Main
         onEditProfile = {handleProfileClick} 
 
@@ -90,11 +93,8 @@ function handleEditAvatarClick() {
 
       <Footer />
 
-      
-   
-
-
 </div>
+</CurrentUserContext.Provider>
   );
 }
 
