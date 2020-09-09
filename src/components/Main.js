@@ -8,30 +8,45 @@ function Main(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-console.log(currentUser);
+//console.log(currentUser);
 
   // const [userName, setUserName] = React.useState("Name Placeholder");
   // const [userDescription, setUserDescription] = React.useState("Description Placeholder");
   // const [userAvatar, setUserAvatar] = React.useState("(.././images/blackheart.svg)");
   const [cards, setCards] = React.useState([]);
 
+  function handleCardLike(card) {
+    // Check one more time if this card was already liked
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+    // Send a request to the API and getting the updated card data
+    api.changeLikeCardStatus(card._id, !isLiked)
+    
+    .then((newCard) => {
+        // Create a new array based on the existing one and putting a new card into it
+      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+      // Update the state
+      setCards(newCards);
+    });
+}
+
   React.useEffect(() => {
     
     api.getCardList()
     .then(res => {
-      //console.log(res);
+      console.log(res);
       setCards(res.map(card => ({
         key: card._id,
-        title: card.name,
+        name: card.name,
         image: card.link,
-        likes: card.likes.length,
+        likes: card.likes,
         owner: card.owner
       })));
     })
 
   }, [])
 
-console.log(cards);
+//console.log(cards);
 
   return (
     <main>
@@ -65,11 +80,12 @@ console.log(cards);
           cards.map((card, i) => 
           <Card
             key = {i}
-            title = {card.title}
+            name = {card.name}
             image = {card.image}
             likes = {card.likes}
             card = {card}
-            onCardClick = {props.onCardClick}
+            onCardClick = {props.onCardClick} 
+            onCardLike = {handleCardLike}
             />)
         }
       </ul>
