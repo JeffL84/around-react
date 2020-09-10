@@ -30,6 +30,20 @@ function Main(props) {
     });
 }
 
+function handleCardDelete(card) {
+  // check if the card has been deleted? not sure there is an analog to the isliked above...
+  //send api request 
+  api.removeCard(card._id)
+  .then((remainingCard) => {
+
+    //create new arrayas done above
+    const remainingCards = cards.map((item) => item._id=== card._id ? remainingCard : item);
+    //update the state
+      setCards(remainingCards)
+  })
+  
+}
+
   React.useEffect(() => {
     
     api.getCardList()
@@ -40,7 +54,9 @@ function Main(props) {
         name: card.name,
         image: card.link,
         likes: card.likes,
-        owner: card.owner
+        owner: card.owner, 
+        _id: card._id
+      
       })));
     })
 
@@ -86,6 +102,7 @@ function Main(props) {
             card = {card}
             onCardClick = {props.onCardClick} 
             onCardLike = {handleCardLike}
+            onCardDelete = {handleCardDelete}
             />)
         }
       </ul>

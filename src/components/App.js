@@ -6,7 +6,7 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-
+import EditProfilePopup from './EditProfilePopup.js';
 
 //import './App.css';
 
@@ -68,12 +68,7 @@ function handleEditAvatarClick() {
 
       </Main>
       
-      <PopupWithForm name= "edit-profile" title= "Edit Profile" submitButtonName= "save-button" isOpened = {isEditProfilePopupOpen} onClick = {handleProfileClick} >
-          <input className = "form__name form__name-profile form__input" type = "text" id = "name" name = "name" placeholder ="Name" minLength = "2" maxLength = "40" required/>
-          <span id ="name-error" className = "form__input-error"></span>
-          <input className = "form__description form__description-profile form__input" type = "text" id = "description" name = "description" placeholder = "About Me" minLength = "2" maxLength = "200" required/>
-          <span id ="description-error" className = "form__input-error"></span>
-      </PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onEditProfile = {handleProfileClick} />
 
       <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen} onClick = {handleAddPlaceClick}>
           <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>

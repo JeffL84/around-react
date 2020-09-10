@@ -7,10 +7,14 @@ function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleCardLike() {
-    console.log(props.card);
+    //console.log(props.card);
     props.onCardLike(props.card);
     
   } 
+
+  function handleCardDelete() {
+    props.onCardDelete(props.card._id);
+  }
 
 
   
@@ -39,7 +43,7 @@ const cardLikeButtonClassName = (
   return (
     <div className = "elements__template" key = {props.card.key}>
     <li className = "elements__element" >
-      <button className = {cardDeleteButtonClassName}></button>
+      <button className = {cardDeleteButtonClassName} onClick = {handleCardDelete}></button>
       <div className = "elements__image" style={{ backgroundImage: `url(${props.image})`}} onClick = {handleClick} ></div>
       <div className = "elements__bar">
         <p className = "elements__name">{props.name}</p>
