@@ -3,7 +3,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Card(props) {
 
-  console.log(props.card.likes);
+  //console.log(props.card.likes);
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleCardLike() {

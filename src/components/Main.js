@@ -48,7 +48,7 @@ function handleCardDelete(card) {
     
     api.getCardList()
     .then(res => {
-      console.log(res);
+      //console.log(res);
       setCards(res.map(card => ({
         key: card._id,
         name: card.name,

@@ -7,6 +7,7 @@ import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 
 //import './App.css';
 
@@ -17,7 +18,6 @@ const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 const [selectedCard, setSelectedCard] = React.useState(false);
-
 const [currentUser, setCurrentUser] = React.useState({});
 
 React.useEffect(() => {
@@ -34,10 +34,11 @@ React.useEffect(() => {
   }
 
   //console.log(selectedCard);
+  function handleProfileClick() {
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    console.log("clicked");
+  }
 
-function handleProfileClick() {
-  setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-}
 
 function handleAddPlaceClick() {
   setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
@@ -47,7 +48,25 @@ function handleEditAvatarClick() {
   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
 }
 
+function handleUpdateUser(name, about) {
+  api.setUserInfo([name, about, currentUser.avatar]);
+  setCurrentUser({
+    name: name,
+    about: about,
+    avatar: currentUser.avatar
+  })
 
+}
+
+function handleUpdateAvatar(avatar) {
+  api.setUserAvatar(avatar);
+  setCurrentUser({
+    name: currentUser.name,
+    about: currentUser.about,
+    avatar: avatar
+  })
+
+}
 
   return (
     <CurrentUserContext.Provider value = {currentUser}>
@@ -55,7 +74,7 @@ function handleEditAvatarClick() {
 
       <Header />
       <Main
-        onEditProfile = {handleProfileClick} 
+        onEditProfile = {handleProfileClick}
 
         onAddPlace = {handleAddPlaceClick}
 
@@ -68,7 +87,9 @@ function handleEditAvatarClick() {
 
       </Main>
       
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onEditProfile = {handleProfileClick} />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}/>
+
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar = {handleUpdateAvatar}/>
 
       <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen} onClick = {handleAddPlaceClick}>
           <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>
@@ -78,11 +99,6 @@ function handleEditAvatarClick() {
       </PopupWithForm>
 
       <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
-
-      <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {isEditAvatarPopupOpen} onClick = {handleEditAvatarClick}>
-          <input className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" required/>
-          <span id ="urlAvatar-error" className = "form__input-error"></span>
-      </PopupWithForm>
 
       <ImagePopup isOpened = {isImagePopupOpen} image = "" title="Image Caption" card = {selectedCard} onClick = {handleCardClick}/>
 
