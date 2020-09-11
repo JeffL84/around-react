@@ -36,7 +36,7 @@ React.useEffect(() => {
   //console.log(selectedCard);
   function handleProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    console.log("clicked");
+    //console.log("clicked");
   }
 
 

@@ -20,8 +20,8 @@ React.useEffect(() => {
   setDescription(currentUser.about);
 }, [currentUser]);
 
-console.log(name);
-console.log(description);
+//console.log(name);
+//console.log(description);
 
 function handleSubmit(e) {
   // Prevent the browser from navigating to the form address
