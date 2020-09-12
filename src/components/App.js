@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 
 //import './App.css';
 
@@ -79,6 +80,66 @@ function handleUpdateAvatar(avatar) {
   api.setUserAvatar(avatar);
 }
 
+//CARD section stats here
+
+const [cards, setCards] = React.useState([]);
+
+  function handleCardLike(card) {
+    // Check one more time if this card was already liked
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+    // Send a request to the API and getting the updated card data
+    api.changeLikeCardStatus(card._id, !isLiked)
+    
+    .then((newCard) => {
+        // Create a new array based on the existing one and putting a new card into it
+      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+      // Update the state
+      setCards(newCards);
+    });
+}
+
+function handleCardDelete(card) {
+  // check if the card has been deleted? not sure there is an analog to the isliked above...
+  //send api request 
+  api.removeCard(card._id)
+  .then((remainingCard) => {
+
+    //create new arrayas done above
+    const remainingCards = cards.map((item) => item._id=== card._id ? remainingCard : item);
+    //update the state
+      setCards(remainingCards)
+  })
+}
+
+
+
+React.useEffect(() => {
+    
+  api.getCardList()
+  .then(res => {
+  
+    setCards(res.map(card => ({
+      key: card._id,
+      name: card.name,
+      image: card.link,
+      likes: card.likes,
+      owner: card.owner, 
+      _id: card._id
+    
+    })));
+  })
+
+}, [])
+
+console.log(cards);
+
+function handleAddPlaceSubmit(newCard) { //possible trouble since my api call expects an ovject { title, url }
+  api.addCard(newCard);
+  //setCards([...cards, newCard]);
+}
+
+
   return (
     <CurrentUserContext.Provider value = {currentUser}>
     <div className="page">
@@ -94,6 +155,12 @@ function handleUpdateAvatar(avatar) {
         onCardClick = {handleCardClick} //might have issue here - used twice...
       
         selectedCard = {selectedCard}
+
+        cards = {cards}
+
+        onCardLike = {handleCardLike}
+
+        onCardDelete = {handleCardDelete}
       >
 
       </Main>
@@ -102,12 +169,7 @@ function handleUpdateAvatar(avatar) {
 
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar = {handleUpdateAvatar} onClose= {closeAllPopups}/>
 
-      <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen} onClick = {handleAddPlaceClick}>
-          <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>
-          <span id ="title-error" className = "form__input-error"></span>
-          <input className = "form__description form__description-card form__input" type = "url" id = "url" name = "url" placeholder = "Image link" required/>
-          <span id ="url-error" className = "form__input-error"></span>
-      </PopupWithForm>
+      <AddPlacePopup isOpen = {isAddPlacePopupOpen} onAddPlace = {handleAddPlaceSubmit} onClose = {closeAllPopups}/>
 
       <PopupWithForm name= "delete-card" title= "Are you sure?" submitButtonName= "card-delete-confirm" />
 

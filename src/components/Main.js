@@ -1,5 +1,5 @@
 import React from 'react';
-import {api} from '../utils/api.js';
+
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
@@ -13,56 +13,9 @@ function Main(props) {
   // const [userName, setUserName] = React.useState("Name Placeholder");
   // const [userDescription, setUserDescription] = React.useState("Description Placeholder");
   // const [userAvatar, setUserAvatar] = React.useState("(.././images/blackheart.svg)");
-  const [cards, setCards] = React.useState([]);
-
-  function handleCardLike(card) {
-    // Check one more time if this card was already liked
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    // Send a request to the API and getting the updated card data
-    api.changeLikeCardStatus(card._id, !isLiked)
-    
-    .then((newCard) => {
-        // Create a new array based on the existing one and putting a new card into it
-      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
-      // Update the state
-      setCards(newCards);
-    });
-}
-
-function handleCardDelete(card) {
-  // check if the card has been deleted? not sure there is an analog to the isliked above...
-  //send api request 
-  api.removeCard(card._id)
-  .then((remainingCard) => {
-
-    //create new arrayas done above
-    const remainingCards = cards.map((item) => item._id=== card._id ? remainingCard : item);
-    //update the state
-      setCards(remainingCards)
-  })
   
-}
 
-  React.useEffect(() => {
-    
-    api.getCardList()
-    .then(res => {
-      //console.log(res);
-      setCards(res.map(card => ({
-        key: card._id,
-        name: card.name,
-        image: card.link,
-        likes: card.likes,
-        owner: card.owner, 
-        _id: card._id
-      
-      })));
-    })
 
-  }, [])
-
-//console.log(cards);
 
   return (
     <main>
@@ -93,7 +46,7 @@ function handleCardDelete(card) {
 
       <ul className = "elements">
         {
-          cards.map((card, i) => 
+          props.cards.map((card, i) => 
           <Card
             key = {i}
             name = {card.name}
@@ -101,8 +54,8 @@ function handleCardDelete(card) {
             likes = {card.likes}
             card = {card}
             onCardClick = {props.onCardClick} 
-            onCardLike = {handleCardLike}
-            onCardDelete = {handleCardDelete}
+            onCardLike = {props.onCardLike}
+            onCardDelete = {props.onCardDelete}
             />)
         }
       </ul>
