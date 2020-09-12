@@ -27,6 +27,13 @@ React.useEffect(() => {
   });
 }, [])
 
+function closeAllPopups() {
+  setIsEditProfilePopupOpen(false);
+  setIsAddPlacePopupOpen(false);
+  setIsEditAvatarPopupOpen(false);
+  setIsImagePopupOpen(false);
+}
+
   function handleCardClick(card) {
     setIsImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(card);
@@ -48,24 +55,28 @@ function handleEditAvatarClick() {
   setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
 }
 
-function handleUpdateUser(name, about) {
-  api.setUserInfo([name, about, currentUser.avatar]);
+function handleUpdateUser(name, about, ...rest) {
   setCurrentUser({
     name: name,
     about: about,
     avatar: currentUser.avatar
-  })
+  });
+  console.log("handleUpdateUser");
+  //console.log([name, about, currentUser.avatar]);
+  api.setUserInfo([name, about, currentUser.avatar]);
+ 
 
 }
 
+//console.log("App.js currentUser", currentUser);
+
 function handleUpdateAvatar(avatar) {
-  api.setUserAvatar(avatar);
   setCurrentUser({
     name: currentUser.name,
     about: currentUser.about,
     avatar: avatar
-  })
-
+  });
+  api.setUserAvatar(avatar);
 }
 
   return (
@@ -87,9 +98,9 @@ function handleUpdateAvatar(avatar) {
 
       </Main>
       
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}/>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} handleEditAvatarClick= {handleEditAvatarClick} onClose= {closeAllPopups}/>
 
-      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar = {handleUpdateAvatar}/>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar = {handleUpdateAvatar} onClose= {closeAllPopups}/>
 
       <PopupWithForm name= "add-card" title= "New Place" submitButtonName= "card-save-button" isOpened = {isAddPlacePopupOpen} onClick = {handleAddPlaceClick}>
           <input className = "form__name form__name-card form__input" type = "text" id = "title" name = "title" placeholder ="Title" minLength = "1" maxLength = "30" required/>

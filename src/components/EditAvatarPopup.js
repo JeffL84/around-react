@@ -10,14 +10,15 @@ function EditAvatarPopup(props) {
 
   const [avatar, setAvatar] =React.useState(currentUser.avatar);
 
-  const avatarInput = React.useRef(avatar);
+  const avatarInput = React.useRef(); //removed avatar as per David's suggestion
 
-  // React.useEffect(() => {
-  //   setAvatar(currentUser.avatar);
-  // }, [currentUser]);
+  React.useEffect(() => {
+    setAvatar(currentUser.avatar);
+  }, [currentUser]);
 
   function handleAvatarChange() {
     setAvatar(avatarInput.current.value);
+    console.log(avatar);
   }
 
   function handleSubmit(e) {
@@ -31,10 +32,10 @@ function EditAvatarPopup(props) {
 
   return (
     
-    <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {props.isOpen} onClick = {props.handleEditAvatarClick} onSubmit = {handleSubmit}>
-    <input ref={avatarInput} className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" onChange = {handleAvatarChange} required/>
-    <span id ="urlAvatar-error" className = "form__input-error"></span>
-</PopupWithForm>
+    <PopupWithForm name= "change-avatar" title= "Change profile picture" submitButtonName= "avatar-confirm" isOpened = {props.isOpen} onClick = {props.handleEditAvatarClick} onClose = {props.onClose} onSubmit = {handleSubmit}>
+      <input ref={avatarInput} className = "form__description form__description-card form__input" type = "url" id = "urlAvatar" name = "url" placeholder = "Image link" onChange = {handleAvatarChange} required/>
+      <span id ="urlAvatar-error" className = "form__input-error"></span>
+    </PopupWithForm>
 
   );
 

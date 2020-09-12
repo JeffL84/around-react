@@ -69,13 +69,13 @@ class Api {
   );
   }
 
-  setUserInfo([ name, job, avatar ]) { //name and about might be different in mine
+  setUserInfo( [name, job, avatar] ) { //name and about might be different in mine
     return fetch(`${this._baseUrl}/users/me` , {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
-        job: job,
+        about: job,
         avatar: avatar
       })
      
