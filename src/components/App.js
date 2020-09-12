@@ -100,13 +100,15 @@ const [cards, setCards] = React.useState([]);
 }
 
 function handleCardDelete(card) {
+  console.log(cards);
   // check if the card has been deleted? not sure there is an analog to the isliked above...
+  
   //send api request 
   api.removeCard(card._id)
   .then((remainingCard) => {
-
+    console.log(remainingCard);
     //create new arrayas done above
-    const remainingCards = cards.map((item) => item._id=== card._id ? remainingCard : item);
+    const remainingCards = cards.map((item) => item._id === card._id ? remainingCard : item);
     //update the state
       setCards(remainingCards)
   })
@@ -132,7 +134,7 @@ React.useEffect(() => {
 
 }, [])
 
-console.log(cards);
+//console.log(cards);
 
 function handleAddPlaceSubmit(newCard) { //possible trouble since my api call expects an ovject { title, url }
   api.addCard(newCard);
