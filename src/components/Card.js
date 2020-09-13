@@ -3,26 +3,20 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Card(props) {
 
-  //console.log(props.card.likes);
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleCardLike() {
     //console.log(props.card);
     props.onCardLike(props.card);
-    
   } 
 
   function handleCardDelete() {
     props.onCardDelete(props.card);
-    
   }
-
-
   
   function handleClick() {
     props.onCardClick(props.card);
   } 
-//console.log(props.card.likes);
 
   // Checking if you are the owner of the current card
 const isOwn = props.card.owner._id === currentUser._id;
@@ -33,7 +27,7 @@ const cardDeleteButtonClassName = (
 );
 
 // Check if the card was liked by the current user
-const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
 
 // Create a variable which you then set in `className` for the like button
 const cardLikeButtonClassName = (

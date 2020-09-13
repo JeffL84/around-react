@@ -13,9 +13,10 @@ function formClose(modal) {
 
 function setOverlayListeners() {
   formOverlaysList.forEach((overlayElement) => {
-   overlayElement.addEventListener("click", closeParentForm);
+    overlayElement.addEventListener("click", closeParentForm);
   }
-)};
+  )
+};
 
 function closeParentForm(evt) {
   formClose(evt.target.closest(".form"));
@@ -24,13 +25,13 @@ function closeParentForm(evt) {
 
 function handleEscUp(evt) {
   const formsList = Array.from(document.querySelectorAll(".form"));
-    if (evt.keyCode == 27) {
-      formsList.forEach((modal) => {
-          if (modal.classList.contains("form_is-opened")) {
-            formClose(modal);
-        }
-        }); 
+  if (evt.keyCode == 27) {
+    formsList.forEach((modal) => {
+      if (modal.classList.contains("form_is-opened")) {
+        formClose(modal);
       }
+    });
+  }
 }
 
 function fillImagePopup(link, title) {
@@ -41,4 +42,4 @@ function fillImagePopup(link, title) {
 }
 
 
-export {fillImagePopup, formOpen, formClose, setOverlayListeners, closeParentForm, handleEscUp, formOverlaysList};
+export { fillImagePopup, formOpen, formClose, setOverlayListeners, closeParentForm, handleEscUp, formOverlaysList };
