@@ -124,26 +124,21 @@ function App() {
   React.useEffect(() => {
 
     api.getCardList()
-      .then(res => {
-
-        setCards(res.map(card => ({
-          key: card._id,
-          name: card.name,
-          image: card.link,
-          likes: card.likes,
-          owner: card.owner,
-          _id: card._id
-
-        })));
-      })
+      .then(res => setCards(res))
       .catch(err => {
         console.log(err)
       })
 
   }, [])
 
-  //console.log(cards);
-
+  //mapping prior to attempts to fix
+  // setCards(res.map(card => ({
+  //   key: card._id,
+  //   name: card.name,
+  //   image: card.link,
+  //   likes: card.likes,
+  //   owner: card.owner,
+  //   _id: card._id
 
 
 

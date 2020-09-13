@@ -50,19 +50,31 @@ function Main(props) {
               <Card
                 key={i}
                 name={card.name}
-                image={card.image}
+                image={card.link}
                 likes={card.likes}
                 card={card}
                 onCardClick={props.onCardClick}
                 onCardLike={props.onCardLike}
                 onCardDelete={props.onCardDelete}
+                _id = {card._id}
+                owner = {card.owner}
               />)
           }
         </ul>
 
       </section>
 
-
+      {/* mapping prior to attmepts to fix
+      props.cards.map((card, i) =>
+              <Card
+                key={i}
+                name={card.name}
+                image={card.image}
+                likes={card.likes}
+                card={card}
+                onCardClick={props.onCardClick}
+                onCardLike={props.onCardLike}
+                onCardDelete={props.onCardDelete} */}
 
 
     </main>
