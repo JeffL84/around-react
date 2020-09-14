@@ -54,7 +54,7 @@ function App() {
 
   function handleUpdateUser(name, about, ...rest) {
     api.setUserInfo([name, about, currentUser.avatar])
-    .then(setCurrentUser({
+    .then(() => setCurrentUser({
       name: name,
       about: about,
       avatar: currentUser.avatar
@@ -64,7 +64,7 @@ function App() {
 
   function handleUpdateAvatar(avatar) {
     api.setUserAvatar(avatar)
-    .then(setCurrentUser({
+    .then(() => setCurrentUser({
       name: currentUser.name,
       about: currentUser.about,
       avatar: avatar
